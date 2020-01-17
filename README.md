@@ -9,8 +9,11 @@ TLmutation first requires a model to represent the protein sequence. The current
 
 https://github.com/debbiemarkslab/EVcouplings
 
+<<<<<<< HEAD
 
 Below is an example script to execute the EVcoupling pipeline.
+=======
+>>>>>>> 9d7cb94aa3bad5d260e5da0d0f687ebf83e0e811
 ```
 import os
 os.environ['QT_QPA_PLATFORM']='offscreen' 
@@ -18,7 +21,11 @@ from evcouplings.utils import read_config_file, write_config_file
 from evcouplings.utils import read_config_file
 from evcouplings.utils.pipeline import execute
 
+<<<<<<< HEAD
 config = read_config_file("config-CXCR4.txt")
+=======
+config = read_config_file("config-ubiquitin.txt")
+>>>>>>> 9d7cb94aa3bad5d260e5da0d0f687ebf83e0e811
 outcfg = execute(**config)
 
 ```
