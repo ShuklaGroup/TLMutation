@@ -17,15 +17,9 @@ from evcouplings.utils import read_config_file, write_config_file
 from evcouplings.utils import read_config_file
 from evcouplings.utils.pipeline import execute
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 config = read_config_file("config-CXCR4.txt")
-=======
 config = read_config_file("config-ubiquitin.txt")
->>>>>>> 9d7cb94aa3bad5d260e5da0d0f687ebf83e0e811
-=======
 config = read_config_file("config-ubiquitin.txt")
->>>>>>> 9d7cb94aa3bad5d260e5da0d0f687ebf83e0e811
 outcfg = execute(**config)
 
 ```
