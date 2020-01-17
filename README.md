@@ -9,14 +9,7 @@ TLmutation first requires a model to represent the protein sequence. The current
 
 https://github.com/debbiemarkslab/EVcouplings
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-
 Below is an example script to execute the EVcoupling pipeline.
-=======
->>>>>>> 9d7cb94aa3bad5d260e5da0d0f687ebf83e0e811
-=======
->>>>>>> 9d7cb94aa3bad5d260e5da0d0f687ebf83e0e811
 ```
 import os
 os.environ['QT_QPA_PLATFORM']='offscreen' 
