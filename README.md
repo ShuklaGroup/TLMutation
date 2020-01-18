@@ -18,12 +18,8 @@ from evcouplings.utils import read_config_file
 from evcouplings.utils.pipeline import execute
 
 config = read_config_file("config-CXCR4.txt")
-config = read_config_file("config-ubiquitin.txt")
-config = read_config_file("config-ubiquitin.txt")
 outcfg = execute(**config)
 
 ```
-
-
 
 ## 2. Train model on the training data for Source protein 
