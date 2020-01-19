@@ -25,6 +25,57 @@ outcfg = execute(**config)
 
 ## 2. Train model on the training data for source protein
 
+First, let us split the dataset accordingly into training and testing datasets.
+
+The DMS dataset should be in a .csv format as shown.
+
+```
+mutant,linear
+...
+E2L,0.605017852
+E2I,-2.179323351
+E2V,0.148787296
+E2A,-0.222549939
+E2S,0.32657855
+E2T,-1.829107102
+E2N,1.136931418
+E2Q,-0.18022787
+E2D,-0.929420795
+...
+G3V,-1.085390056
+G3A,-0.943412925
+G3S,0.372614715
+G3T,-0.321523109
+G3N,-1.660989957
+G3Q,1.538280976
+G3D,-2.056820679
+...
+
+```
+
+We split the data into random 80/20 training/test sets.
+
+Here, we have used a simple python script (``train_test_split.py``).
+```
+import pandas as pd
+import numpy as np
+
+#Number of folds
+k = 5
+
+dataAddress= "CXCR4_exp.csv"
+
+df = pd.read_csv(dataAddress, sep=",", comment="#")
+
+for f in range(k):
+    msk = np.random.rand(len(df)) < 0.8
+    tr = df[msk]
+    te = df[~msk]
+    te.to_csv('testdataset_'+str(f)+'.csv')
+    tr.to_csv('trainingdataset_'+str(f)+'.csv')
+``` 
+
+
 Now that we have a model, we will train the model of the source protein with the experimental deep mutational scanning (DMS) dataset.
 
 ```
@@ -65,27 +116,4 @@ s2 = score(dx, data_exp=dataAdress)
 print('Score for CXCR4 after training: ', s2)
 ```
 
-The DMS dataset should be in a .csv format as shown.
 
-```
-mutant,linear
-...
-E2L,0.605017852
-E2I,-2.179323351
-E2V,0.148787296
-E2A,-0.222549939
-E2S,0.32657855
-E2T,-1.829107102
-E2N,1.136931418
-E2Q,-0.18022787
-E2D,-0.929420795
-...
-G3V,-1.085390056
-G3A,-0.943412925
-G3S,0.372614715
-G3T,-0.321523109
-G3N,-1.660989957
-G3Q,1.538280976
-G3D,-2.056820679
-...
-``` 
