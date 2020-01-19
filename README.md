@@ -23,7 +23,7 @@ outcfg = execute(**config)
 ```
 
 
-## 2. Train model on the training data for source protein
+## 2. Train the model of the source protein
 
 First, let us split the dataset accordingly into training and testing datasets.
 
@@ -115,5 +115,17 @@ dx = model_source.predict(X=dataAdress)
 s2 = score(dx, data_exp=dataAdress)
 print('Score for CXCR4 after training: ', s2)
 ```
+
+After training the model on the DMS data, we observed an increase in the Spearman's correlation, signifying the incorporation of experimental data greatly benifits the model.
+
+```
+Score for CXCR4 before training:  ('sp', 0.18850110422581887)
+Score for CXCR4 after training:  ('sp', 0.23964570190788292)
+
+```
+
+
+## 3. Transfer the weights to the traget protein model
+
 
 
