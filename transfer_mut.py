@@ -11,13 +11,14 @@ data = pd.read_csv(dataAdress_source, sep=",", comment="#")
 model_source = jmhe(Couplings_model=Couplings_model_source)
 
 # Predict from initial model
-dx2 = model_source.predict(X=dataAdress)
-s1 = score(dx2, data_exp=dataAdress)
+dx2 = model_source.predict(X=dataAdress_source)
+s1 = score(dx2, data_exp=dataAdress_source)
 
+# Calculate the Spearman's correlation score before traning
 print('Score for CXCR4 before training: ', s1)
 
-# Predict after fitting with experimental data
 
+# Predict after fitting with experimental data
 model_source.sp = s1[0]
 if s1[1]>0:
   model_source.positiveL = True
@@ -28,32 +29,29 @@ model_source.fit(data)
 pickle.dump(model_source, open('model_cxcr4.pkl', 'wb'))
 #model_source = pickle.load(open('model_cxcr4.pkl', 'rb'))
 
-dx = model_source.predict(X=dataAdress)
+dx = model_source.predict(X=dataAdress_source)
 
 # Calculate the Spearman's correlation score
-s2 = score(dx, data_exp=dataAdress)
+s2 = score(dx, data_exp=dataAdress_source)
 print('Score for CXCR4 after training: ', s2)
 
 
-# For comparison, predict the target model without transfer
-
-# Model of target protein
+# Transfer from source protein to target protein 
 Couplings_model_target='/home/zshamsi2/projects/functionalCouplings/CXCR4-CCR5/jmhe/CCR5/Model.model'
+model_target = jmhe(Couplings_model=Couplings_model_target)
 
-# Path of experimental DMS dataset
+#DMS dataset for the target protein, for evaluating purposes
 dataAdress_target = "/home/zshamsi2/projects/functionalCouplings/CXCR4-CCR5/jmhe/CCR5/BiFC/exp.csv"
 data_target_target = pd.read_csv(dataAdress_target, sep=",", comment="#")
 
-model_target = jmhe(Couplings_model=Couplings_model_target)
 
+# To compare, let's see how predicting the target protein without transfer will do
 dx2 = model_target.predict(X=dataAdress_target)
 
-# Calculate the Spearman's correlation score
+# Calculate the Spearman's correlation score without transfer to the actual DMS dataset
 s1 = score(dx2, data_exp=dataAdress_target)
 print('Score for CCR5 before transfer: ',s1)
 
-
-# Transfer from source protein to target protein 
 
 # Sequence alignment file can be generated from any alignment server or program 
 algn_file = '/home/zshamsi2/projects/functionalCouplings/CXCR4-CCR5/case_PMEP_jmhe/CXCR4-CCR5.aln'
@@ -63,7 +61,7 @@ model_target_transfer = model_source.transfer(Couplings_model_target=Couplings_m
 
 dx2_transfer = model_target_transfer.predict(X=dataAdress_target)
 
-# Calculate the Spearman's correlation score
+# Calculate the Spearman's correlation score after transfer to the actual DMS dataset
 s1_transfer = score(dx2_transfer, data_exp=dataAdress_target)
 print('Score for CCR5 after transfer from CCR5', s1_transfer)
 
