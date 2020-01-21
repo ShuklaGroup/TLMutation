@@ -5,7 +5,7 @@ TLmutation: predicting the effects of mutations using transfer learning
 TLmutation leverages deep mutational scanning datasets to predict the functional consequences of mutations in homologous proteins. In this example, we will use TLmutation to transfer from chemokine receptors CXCR4 to CCR5.
 
 ## 1. Building a model for both the source and target protein
-TLmutation first requires a model to represent the protein sequence. The current iteration of TLmutation uses a Pott's model and is built using the EVcouplings package. 
+TLmutation first requires a model to represent the protein sequence. The current iteration of TLmutation uses a Pott's model and is built using the EVcouplings package.
 
 https://github.com/debbiemarkslab/EVcouplings
 
@@ -17,15 +17,16 @@ from evcouplings.utils import read_config_file, write_config_file
 from evcouplings.utils import read_config_file
 from evcouplings.utils.pipeline import execute
 
-config = read_config_file("config-CXCR4.txt")
-outcfg = execute(**config)
+source_protein_config = read_config_file("CXCR4-config.txt")
+source_protein_outcfg = execute(**source_protein_config)
 
+target_protein_config = read_config_file("CCR5-config.txt")
+target_protein_outcfg = execute(**target_protein_config)
 ```
 
 
-## 2. Train the model of the source protein
-
-First, let us split the dataset accordingly into training and testing datasets.
+## 2. Supervised transfer learning to a functional assay of the source protein
+In the current iteration of TLmutation, the supervised transfer is from the evolutionary statistical energy to a functional assay. In order to test the performance of the algorithm, first, let us split the experimental dataset of the functional assay accordingly into training and testing datasets. Here, deep mutational scanning (DMS) is the studied experimental assay.
 
 The DMS dataset should be in a .csv format as shown.
 
@@ -53,7 +54,7 @@ G3D,-2.056820679
 
 ```
 
-Now that we have a model, we will train the model of the source protein (CXCR4) with the experimental deep mutational scanning (DMS) dataset.
+Now that we have a model, we will train the model of the source protein (CXCR4) with the experimental DMS dataset.
 
 The following script is a part of ``transfer_mut.py``. 
 ```
@@ -102,7 +103,7 @@ Score for CXCR4 after training:  ('sp', 0.51009788834287362)
 ```
 
 
-## 3. Transfer the weights to the target protein model
+## 3. Unsupervised transfer between proteins: Transfer the weights to the target protein model
 
 First and as a comparison, we will evaluate how the model will fair without transfer learning.
 
