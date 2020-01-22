@@ -26,7 +26,7 @@ target_protein_outcfg = execute(**target_protein_config)
 
 
 ## 2. Supervised transfer learning to a functional assay of the source protein
-In the current iteration of TLmutation, the supervised transfer is from the evolutionary statistical energy to a functional assay. In order to test the performance of the algorithm, first, let us split the experimental dataset of the functional assay accordingly into training and testing datasets. Here, deep mutational scanning (DMS) is the studied experimental assay.
+In the current iteration of TLmutation, the supervised transfer is from the evolutionary statistical energy to a functional assay. Here, deep mutational scanning (DMS) is the studied experimental assay.
 
 The DMS dataset should be in a .csv format as shown.
 
@@ -54,7 +54,7 @@ G3D,-2.056820679
 
 ```
 
-Now that we have a model, we will train the model of the source protein (CXCR4) with the experimental DMS dataset.
+Now that we have a model, we will incorporate the experimental DMS dataset into the model of the source protein (CXCR4).
 
 The following script is a part of ``transfer_mut.py``. 
 ```
