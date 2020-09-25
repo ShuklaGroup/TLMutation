@@ -2,7 +2,9 @@
 
 TLmutation: predicting the effects of mutations using transfer learning
 
-TLmutation leverages deep mutational scanning datasets to predict the functional consequences of mutations in homologous proteins. In this example, we will use TLmutation to transfer from chemokine receptors CXCR4 to CCR5.
+TLmutation leverages deep mutational scanning datasets to predict the functional consequences of mutations in homologous proteins. Find our publication here: https://pubs.acs.org/doi/full/10.1021/acs.jpcb.0c00197
+
+In this example, we will use TLmutation to transfer from chemokine receptors CXCR4 to CCR5.
 
 ## 1. Building a model for both the source and target protein
 TLmutation first requires a model to represent the protein sequence. The current iteration of TLmutation uses a Pott's model and is built using the EVcouplings package.
